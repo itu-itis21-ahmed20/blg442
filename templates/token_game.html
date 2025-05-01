@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}GamEco | Token Quiz Demo{% endblock %}
+
+{% block content %}
+<style>
+  .quiz-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; background:#111; border:1px solid var(--gold); border-radius:8px; }
+  fieldset      { border:none; margin-bottom:1.75rem; }
+  legend        { color:var(--gold); font-weight:bold; margin-bottom:.5rem; }
+  label         { display:block; margin:.4rem 0; cursor:pointer; }
+  .submit-btn   { background:var(--gold); color:var(--black); padding:.65rem 1.5rem; border:none; border-radius:4px; font-weight:bold; cursor:pointer; }
+  #result-msg   { margin-top:1.5rem; font-size:1.1rem; }
+  /* Popup */
+  #success-popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.8); display:flex; align-items:center; justify-content:center; visibility:hidden; }
+  #success-popup.active { visibility:visible; }
+  .popup-box   { background:#000; border:2px solid var(--gold); padding:2rem; text-align:center; border-radius:8px; max-width:320px; }
+  .popup-box img { width:120px; margin-bottom:1rem; }
+  .popup-box button { margin-top:1rem; }
+</style>
+
+<section class="quiz-container">
+  <h2 style="text-align:center; color:var(--gold); margin-bottom:1rem;">⚠ Prototype Demo Only</h2>
+
+  <form id="quiz-form">
+    <!-- Q1 -->
+    <fieldset>
+      <legend>1. You plan to buy a house in 5&nbsp;years. Which savings vehicle usually gives you the best balance of safety&nbsp;+ growth?</legend>
+      <label><input type="radio" name="q1" value="a"> Regular checking account</label>
+      <label><input type="radio" name="q1" value="b"> High‑yield savings / money‑market fund</label>
+      <label><input type="radio" name="q1" value="c"> 5‑year cryptocurrency staking</label>
+    </fieldset>
+
+    <!-- Q2 -->
+    <fieldset>
+    <legend>2. Markets dip 15 % and you still have a 5-year goal. Which action historically keeps long-term plans on track?</legend>
+    <label><input type="radio" name="q2" value="a"> Sell everything to avoid deeper losses</label>
+    <label><input type="radio" name="q2" value="b"> Keep contributing the same amount at regular intervals</label>  <!-- correct -->
+    <label><input type="radio" name="q2" value="c"> Borrow money to buy high-risk alt-coins</label>
+    </fieldset>
+
+    <!-- Q3 -->
+    <fieldset>
+    <legend>3. You face an unexpected €800 car-repair bill. Which option is typically the <em>cheapest</em> way to pay it?</legend>
+    <label><input type="radio" name="q3" value="a"> Pay from your emergency-fund savings</label>  <!-- correct -->
+    <label><input type="radio" name="q3" value="b"> Carry the balance on a credit card for six months</label>
+    <label><input type="radio" name="q3" value="c"> Take a payday loan</label>
+    </fieldset>
+  
+
+    <button type="submit" class="submit-btn">Submit Answers</button>
+    <div id="result-msg"></div>
+  </form>
+</section>
+
+<!-- Success Popup -->
+<div id="success-popup">
+  <div class="popup-box">
+    <img src="{% static 'images/gco-token.png' %}" alt="GCO Token">
+    <h3 style="color:var(--gold);">Perfect Score!</h3>
+    <p>You earned a shiny <strong>GCO</strong> token. 🥳</p>
+    <button class="submit-btn" onclick="document.getElementById('success-popup').classList.remove('active')">Close</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('quiz-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const correct = { q1: 'b', q2: 'b', q3: 'a' };
+    let allCorrect = true;
+    for (const key in correct) {
+      const chosen = document.querySelector(`input[name="${key}"]:checked`);
+      if (!chosen || chosen.value !== correct[key]) {
+        allCorrect = false;
+        break;
+      }
+    }
+
+    const resultMsg = document.getElementById('result-msg');
+    if (allCorrect) {
+      resultMsg.textContent = '';
+      document.getElementById('success-popup').classList.add('active');
+    } else {
+      resultMsg.style.color = 'var(--gold)';
+      resultMsg.textContent = 'Wrong answers — try reviewing the questions and submit again!';
+    }
+  });
+</script>
+{% endblock %}

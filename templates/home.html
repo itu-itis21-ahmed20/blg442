@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}GamEco | Learn • Play • Earn{% endblock %}
+
+{% block content %}
+<!-- ─────────────────── BACKGROUND IMAGE ────────────────── -->
+<section class="hero" style="background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('{% static 'images/banner.png' %}') center/cover no-repeat; padding:10rem 2rem; text-align:center;">
+    <h2 class="tagline">Learn Finance. Play the Market. Earn Real Rewards.</h2>
+    <p>
+      GamEco turns everyday money skills—budgeting, saving, investing—into quick
+      <em>daily challenges</em>. Clear tasks, win points, and claim on‑chain rewards.
+    </p>
+    <a class="cta-btn" href="{% url 'token_game' %}">Preview the Token Game →</a>
+  </section>
+
+<!-- How It Works ----------------------------------------------------->
+<section class="section dark">
+  <h3>How&nbsp;GamEco&nbsp;Works</h3>
+  <ol class="flow">
+    <li><strong>Play short quests.</strong> Each quest teaches a bite‑size concept (e.g., “build a 50 € budget” or “compare two ETFs”).</li>
+    <li><strong>Make a choice.</strong> Pick an answer, drag a slider, or place a risk‑free trade inside our simulation.</li>
+    <li><strong>Earn Web3 rewards.</strong> Smart contracts mint <span class="gold">GCO tokens</span> and NFT cards to your wallet the moment you complete a quest.</li>
+    <li><strong>Trade &amp; compete.</strong> Swap cards on open marketplaces, stake tokens, and climb weekly leaderboards.</li>
+  </ol>
+</section>
+
+<!-- What We Offer ---------------------------------------------------->
+<section class="section light">
+  <h3>What We Offer</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Interactive Micro‑Lessons</h4>
+      <p>No long videos. Just 3‑minute, hands‑on tasks that build real financial muscle.</p>
+    </div>
+    <div class="card">
+      <h4>Token Economy</h4>
+      <p>GCO tokens and staking rewards, giving learning value.</p>
+    </div>
+    <div class="card">
+      <h4>Collectible NFT Cards</h4>
+      <p>Each card reflects a skill you mastered and can be traded into future game mechanics.</p>
+    </div>
+    <div class="card">
+      <h4>Community &amp; Challenges</h4>
+      <p>Weekly quests, Discord hack‑n‑learn nights, and in‑game leaderboards keep you improving together.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action --------------------------------------------------->
+<section class="section cta dark">
+  <h3>Ready to Level Up?</h3>
+  <p>Jump into the finance playground, collect GCO, and master money skills that last a lifetime.</p>
+  <a class="cta-btn" href="{% url 'token_game' %}">Start Playing</a>
+</section>
+{% endblock %}
